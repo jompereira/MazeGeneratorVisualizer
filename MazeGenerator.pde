@@ -1,5 +1,7 @@
 class MazeGenerator
 {
+  boolean isGenerationCompleted = false;
+  
   boolean UpdateVisualization(int framesPerUpdate)
   {
      if(frameCount % framesPerUpdate != 0)
@@ -8,7 +10,7 @@ class MazeGenerator
      return true;
   }
   
-  boolean isDirectionValid(int x, int y, int direction)
+  boolean isDirectionWithWall(int x, int y, int direction)
   {
     switch(direction)
     {
@@ -16,13 +18,53 @@ class MazeGenerator
       return y > 0 && grid.cells[x][y].hasUp;   
      
      case 1: // Down
-      return y < grid.gridSizeY-1 && grid.cells[x][y].hasDown;
+      return y < grid.gridSizeY && grid.cells[x][y].hasDown;
      
      case 2: // Left
       return x > 0 && grid.cells[x][y].hasLeft;       
      
      case 3: // Right
-      return x < grid.gridSizeX-1 && grid.cells[x][y].hasRight;
+      return x < grid.gridSizeX && grid.cells[x][y].hasRight;
+    }
+    
+    return false;
+  }
+  
+  boolean isDirectionValid(int x, int y, int direction)
+  {
+    switch(direction)
+    {
+     case 0: // Up
+      return y-1 >= 0;   
+     
+     case 1: // Down
+      return y+1 < grid.gridSizeY;
+     
+     case 2: // Left
+      return x-1 >= 0;       
+     
+     case 3: // Right
+      return x+1 < grid.gridSizeX;
+    }
+    
+    return false;
+  }
+  
+  boolean isDirectionVisited(int x, int y, int direction)
+  {
+    switch(direction)
+    {
+     case 0: // Up
+      return grid.cells[x][y-1].visited;   
+     
+     case 1: // Down
+      return grid.cells[x][y+1].visited;
+     
+     case 2: // Left
+      return grid.cells[x-1][y].visited;       
+     
+     case 3: // Right
+      return grid.cells[x+1][y].visited;
     }
     
     return false;

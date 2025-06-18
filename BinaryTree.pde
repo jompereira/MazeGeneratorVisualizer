@@ -1,15 +1,3 @@
-//class BinaryTreeCell extends Cell
-//{
-//  BinaryTreeCell(int InX, int InY, int InHalfSize)
-//  {
-//    super(InX, InY, InHalfSize);
-    
-//    visited = false;
-//  }
-  
-//  boolean visited;
-//}
-
 class BinaryTree extends MazeGenerator
 {
   BinaryTree(Grid InGrid)
@@ -22,11 +10,14 @@ class BinaryTree extends MazeGenerator
     directions = new IntList();
     directions.append(0);
     directions.append(3);
+    
+    movingPositively = true;
   }
   
   Grid grid;
   int currentX, currentY;
   IntList directions;
+  boolean movingPositively = true;
   
   void update(int framesPerUpdate)
   {
@@ -34,13 +25,13 @@ class BinaryTree extends MazeGenerator
     if(!UpdateVisualization(framesPerUpdate))
       return;
     
-    if(currentX < grid.gridSizeX && currentY < grid.gridSizeY)
+    if(!isGenerationCompleted)
     {
       directions.shuffle();
       
       for(int dir : directions)
       {
-        if(isDirectionValid(currentX, currentY, dir))
+        if(isDirectionWithWall(currentX, currentY, dir))
         {
           carvePath(currentX, currentY, dir);
           break;
@@ -48,24 +39,38 @@ class BinaryTree extends MazeGenerator
       }
       
       advancePosition();
-    }
-    else
-    {
-      advancePosition(); //<>//
-    }
+    } //<>// //<>// //<>//
   }
   
   void advancePosition()
   {
-   if(currentY == grid.gridSizeY-1)
-   {
-     currentX++;
-     currentY = 0;
-   }
-   else
-   {
-     currentY++;
-   }
+    if(movingPositively)
+    {
+      if(currentY < grid.gridSizeY-1)
+      {
+         currentY++; 
+      }
+      else
+      {
+        movingPositively = false;
+        currentX++;
+      }
+    }
+    else
+    {
+      if(currentY > 0)
+      {
+        currentY--;
+      }
+      else
+      {
+       movingPositively = true;
+       currentX++;
+      }
+    }
+   
+   if(currentX >= grid.gridSizeX)
+     isGenerationCompleted = true;
   }
   
   void draw()
@@ -74,10 +79,10 @@ class BinaryTree extends MazeGenerator
     
     if(currentX >= 0 && currentX < grid.gridSizeX && currentY >= 0 && currentY < grid.gridSizeY)
     {
-      fill(256,0,0);
+      fill(0,0,256);
       rect(grid.cells[currentX][currentY].x - grid.cells[currentX][currentY].halfSize,
       grid.cells[currentX][currentY].y - grid.cells[currentX][currentY].halfSize,
-      grid.cells[currentX][currentY].halfSize * 2, grid.cells[currentX][currentY].halfSize * 2);
+      grid.cells[currentX][currentY].size, grid.cells[currentX][currentY].size);
     }    
   }
   

@@ -5,7 +5,7 @@
 
 class Grid
 {
-  Grid(Cell[][] InCells, int InSizeX, int InSizeY, int InCellHalfSize, int InX, int InY)
+  Grid(Cell[][] InCells, int InSizeX, int InSizeY, float InCellSize, int InX, int InY)
   {
     gridSizeX = InSizeX;
     gridSizeY = InSizeY;
@@ -16,13 +16,13 @@ class Grid
     
     for(int x = 0; x < gridSizeX; ++x)
     {
-      CurrentX += InCellHalfSize * 2;
+      CurrentX += InCellSize;
       CurrentY = InY;
       
        for(int y = 0; y < gridSizeY; ++y)
        {
-           cells[x][y] = new Cell(CurrentX, CurrentY, InCellHalfSize);
-           CurrentY += InCellHalfSize * 2;
+           cells[x][y] = new Cell(CurrentX, CurrentY, InCellSize);
+           CurrentY += InCellSize;
        }
     }
   }
@@ -30,6 +30,22 @@ class Grid
   Cell[][] cells;
   int gridSizeX;
   int gridSizeY;
+  
+  int getNumberOfDeadEnds()
+  {
+     int count = 0;
+     
+     for(int x = 0; x < gridSizeX; ++x)
+     {
+       for(int y = 0; y < gridSizeY; ++y)
+       {
+          if(cells[x][y].getNumberOfLinks() == 1)
+            count++;
+       }
+     }
+     
+     return count;
+  }
   
   void draw()
   {

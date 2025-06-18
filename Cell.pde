@@ -1,26 +1,53 @@
 class Cell
 {
-    float x, y;
+    int x, y;
+    float size;
     float halfSize;
    
-   public Cell(int InX, int InY, int InHalfSize)
+   public Cell(int InX, int InY, float InSize)
    {
      x = InX;
      y = InY;
-     halfSize = InHalfSize;
+     size = InSize;
+     halfSize = InSize * 0.5f;
      
      hasUp = hasDown = hasLeft = hasRight = true;
+     visited = false;
    }
   
   
   boolean hasUp, hasDown, hasLeft, hasRight;
+  boolean visited;
+  
+  int getNumberOfLinks()
+  {
+    int count = 0;
+    
+    if(!hasUp)
+      count++;
+      
+    if(!hasDown)
+      count++;
+      
+    if(!hasLeft)
+      count++;
+      
+    if(!hasRight)
+      count++;
+      
+    return count;
+    
+  }
   
   void draw()
   {
+    stroke(0,0,0,0);
+    fill(256,256,256);
+    rect(x - halfSize, y - halfSize, size, size);
+    
     stroke(0,0,0,255);
     strokeWeight(4);
-
-    
+ 
     if(hasUp)
     {
      line(x - halfSize, y - halfSize, x + halfSize, y - halfSize);
@@ -40,9 +67,5 @@ class Cell
     {
      line(x - halfSize, y - halfSize, x - halfSize, y + halfSize); 
     }
-    
-    stroke(0,0,0,0);
-    fill(256,256,256);
-    rect(x - halfSize, y - halfSize, halfSize * 2, halfSize * 2);
   }
 }
