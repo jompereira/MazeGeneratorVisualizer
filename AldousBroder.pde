@@ -43,7 +43,6 @@ class AldousBroder extends MazeGenerator
               carvePath(currentX, currentY, direction);
             }
             moveTo(currentX, currentY, direction);
-            foundPath = true;
             break;
           }
         }
@@ -76,31 +75,6 @@ class AldousBroder extends MazeGenerator
         break;
      }
    }
-   
-   PVector findUnvisitedCellAt(int value)
-   {
-    int count = 0;
-    for(int x = 0; x < grid.gridSizeX; x++)
-    {
-      for(int y = 0; y < grid.gridSizeY; y++)
-      {
-        if(!grid.cells[x][y].visited)
-        {
-          if(count == value)
-          {
-            return new PVector(x, y);
-          }
-          else
-          {
-            count++;
-          }
-        }
-     }
-    }
-    
-    return new PVector();
-  }
-
    
    void draw()
    {

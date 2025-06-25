@@ -8,6 +8,8 @@ Grid grid;
 BinaryTree binaryTree;
 Sidewinder sidewinder;
 AldousBroder aldousBroder;
+Wilsons wilsons;
+HuntAndKill huntAndKill;
 
 int count = 0;
 void setup()
@@ -21,7 +23,9 @@ void setup()
   
   //binaryTree = new BinaryTree(grid);
   //sidewinder = new Sidewinder(grid);
-  aldousBroder = new AldousBroder(grid);
+  //aldousBroder = new AldousBroder(grid);
+  //wilsons = new Wilsons(grid);
+  huntAndKill = new HuntAndKill(grid);
 }
 
 void draw()
@@ -32,6 +36,12 @@ void draw()
   //sidewinder.update(1);
   //sidewinder.draw();
   
-  aldousBroder.update(1);
-  aldousBroder.draw();
+  //aldousBroder.update(1);
+  //aldousBroder.draw();
+  
+  //wilsons.update(1);
+  //wilsons.draw();
+  
+  huntAndKill.update(1);
+  huntAndKill.draw();
 }

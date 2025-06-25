@@ -1,11 +1,14 @@
 class Cell
 {
+    int idX, idY;
     int x, y;
     float size;
     float halfSize;
    
-   public Cell(int InX, int InY, float InSize)
+   public Cell(int inIdX, int inIdY, int InX, int InY, float InSize)
    {
+     idX = inIdX;
+     idY = inIdY;
      x = InX;
      y = InY;
      size = InSize;

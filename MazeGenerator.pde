@@ -1,6 +1,7 @@
 class MazeGenerator
 {
   boolean isGenerationCompleted = false;
+  int currentX, currentY;
   
   boolean UpdateVisualization(int framesPerUpdate)
   {
@@ -50,6 +51,29 @@ class MazeGenerator
     return false;
   }
   
+  int getDirection(int x, int y, int neighbourX, int neighbourY)
+  {
+    
+   if(y < neighbourY)
+   {
+    return 1; 
+   }
+   else if(y > neighbourY)
+   {
+     return 0;
+   }
+   else if(x > neighbourX)
+   {
+     return 2;
+   }
+   else if(x < neighbourX)
+   {
+    return 3; 
+   }
+    
+    return -1;
+  }
+  
   boolean isDirectionVisited(int x, int y, int direction)
   {
     switch(direction)
@@ -95,4 +119,51 @@ class MazeGenerator
       break;
     }
   }
+  
+  void moveTo(int currentX, int currentY, int direction)
+   {
+    switch(direction)
+    {
+      case 0:
+        this.currentY = currentY-1;
+        break;
+        
+        case 1:
+        this.currentY = currentY+1;
+        break;
+        
+        case 2:
+        this.currentX = currentX-1;
+        break;
+        
+        case 3:
+        this.currentX = currentX+1;
+        break;
+     }
+   }
+   
+   PVector findUnvisitedCellAt(int value)
+   {
+    int count = 0;
+    for(int x = 0; x < grid.gridSizeX; x++)
+    {
+      for(int y = 0; y < grid.gridSizeY; y++)
+      {
+        if(!grid.cells[x][y].visited)
+        {
+          if(count == value)
+          {
+            return new PVector(x, y);
+          }
+          else
+          {
+            count++;
+          }
+        }
+     }
+    }
+    
+    return new PVector();
+  }
+  
 }

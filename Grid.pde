@@ -21,7 +21,7 @@ class Grid
       
        for(int y = 0; y < gridSizeY; ++y)
        {
-           cells[x][y] = new Cell(CurrentX, CurrentY, InCellSize);
+           cells[x][y] = new Cell(x, y, CurrentX, CurrentY, InCellSize);
            CurrentY += InCellSize;
        }
     }
@@ -45,6 +45,11 @@ class Grid
      }
      
      return count;
+  }
+  
+  void setVisited(int currentX, int currentY, boolean value)
+  {
+    grid.cells[currentX][currentY].visited = value;
   }
   
   void draw()
