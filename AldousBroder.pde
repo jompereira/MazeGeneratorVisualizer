@@ -1,6 +1,6 @@
-class AldousBroder extends MazeGenerator
+class AldousBroderGenerator extends MazeGenerator
 {
-   AldousBroder(Grid inGrid)
+   AldousBroderGenerator(Grid inGrid)
    {
      grid = inGrid;
      

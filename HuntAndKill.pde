@@ -102,5 +102,7 @@ class HuntAndKill extends MazeGenerator
         grid.cells[currentX][currentY].y - grid.cells[currentX][currentY].halfSize,
         grid.cells[currentX][currentY].size, grid.cells[currentX][currentY].size);
       } 
+      
+      //saveFrame("HuntAndKill-######.png");
   }
 }

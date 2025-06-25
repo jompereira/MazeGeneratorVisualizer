@@ -7,7 +7,7 @@ Grid grid;
 
 BinaryTree binaryTree;
 Sidewinder sidewinder;
-AldousBroder aldousBroder;
+AldousBroderGenerator aldousBroder;
 Wilsons wilsons;
 HuntAndKill huntAndKill;
 
@@ -23,7 +23,7 @@ void setup()
   
   //binaryTree = new BinaryTree(grid);
   //sidewinder = new Sidewinder(grid);
-  //aldousBroder = new AldousBroder(grid);
+  //aldousBroder = new AldousBroderGenerator(grid);
   //wilsons = new Wilsons(grid);
   huntAndKill = new HuntAndKill(grid);
 }
