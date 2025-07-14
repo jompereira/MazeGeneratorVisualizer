@@ -10,6 +10,7 @@ Sidewinder sidewinder;
 AldousBroderGenerator aldousBroder;
 Wilsons wilsons;
 HuntAndKill huntAndKill;
+RecursiveBacktracker recursiveBacktracker;
 
 int count = 0;
 void setup()
@@ -25,7 +26,8 @@ void setup()
   //sidewinder = new Sidewinder(grid);
   //aldousBroder = new AldousBroderGenerator(grid);
   //wilsons = new Wilsons(grid);
-  huntAndKill = new HuntAndKill(grid);
+  //huntAndKill = new HuntAndKill(grid);
+  recursiveBacktracker = new RecursiveBacktracker(grid);
 }
 
 void draw()
@@ -42,6 +44,9 @@ void draw()
   //wilsons.update(1);
   //wilsons.draw();
   
-  huntAndKill.update(1);
-  huntAndKill.draw();
+  //huntAndKill.update(1);
+  //huntAndKill.draw();
+  
+  recursiveBacktracker.update(1);
+  recursiveBacktracker.draw();
 }
