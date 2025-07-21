@@ -1,0 +1,136 @@
+let rows = 10;
+let cols = 10;
+let cellSize = 15;
+let grid;
+let wallThickness = 2;
+let algorithms = ["Binary Tree", "Sidewinder", "Aldous-Broder", "Wilsons", "Hunt and Kill", "Recursive Backtracker", "Prim's", "Kruskal's"];
+let guiSizeWidth = 100;
+let guiSizeHeight = 20;
+let framesPerUpdate = 1;
+
+
+let algorithm;
+
+function setup() 
+{
+  let offsetWidth = wallThickness * 75;
+  let offsetHeight = wallThickness * 15;
+  createCanvas((25 * cellSize) + offsetWidth, (25 * cellSize) + offsetHeight);
+  grid = new Grid(cols, rows, cellSize);
+  algorithm = new BinaryTree(grid);
+  
+  colorMode(RGB);
+  
+  gui();
+}
+
+function draw() {
+  background(220);
+
+  noStroke();
+  textSize(20);
+  fill(0);
+  textAlign(CENTER);
+  textStyle(NORMAL);
+  textFont('Arial');
+  text("Maze Generator", 0,0, width, 50);
+
+  textSize(8);
+  textAlign(LEFT);
+  text("Columns: " + cols, width - guiSizeWidth - wallThickness, wallThickness + guiSizeHeight * 1.6);
+  text("Rows: " + rows, width - guiSizeWidth - wallThickness, wallThickness + guiSizeHeight * 3.2);
+  text("Frames per update: " + framesPerUpdate, width - guiSizeWidth - wallThickness, wallThickness + guiSizeHeight * 4.8);
+
+  algorithm.update();
+  algorithm.draw();
+}
+
+function gui()
+{
+  let posX = width - guiSizeWidth - wallThickness;
+  let posY = wallThickness;
+
+  let selector = createSelect();
+  selector.position(posX, posY);
+  selector.size(guiSizeWidth, guiSizeHeight);
+
+  for (let i=0; i< algorithms.length; i++)
+  {
+    selector.option(algorithms[i]);
+  }
+
+  selector.selected(algorithms[0]);
+  selector.addClass("myElements");
+
+  let widthSlider = createSlider(5, 25, cols);
+  widthSlider.position(width - guiSizeWidth - wallThickness, wallThickness + guiSizeHeight * 1.5);
+  widthSlider.style('margin-top', '5px');
+  widthSlider.size(guiSizeWidth, guiSizeHeight);
+  widthSlider.addClass("mySliders");
+  widthSlider.input(() => {
+    cols = widthSlider.value();
+  });
+
+  let heightSlider = createSlider(5, 25, rows);
+  heightSlider.position(width - guiSizeWidth - wallThickness, wallThickness + guiSizeHeight * 3.1);
+  heightSlider.size(guiSizeWidth, guiSizeHeight);
+  heightSlider.addClass("mySliders");
+  heightSlider.style('margin-top', '5px');
+  heightSlider.style('margin-bottom', '5px');
+  heightSlider.input(() => {
+    rows = heightSlider.value();
+  });
+
+  let framesPerUpdateSlider = createSlider(1, 50, 1);
+  framesPerUpdateSlider.position(width - guiSizeWidth - wallThickness, wallThickness + guiSizeHeight * 4.8);
+  framesPerUpdateSlider.size(guiSizeWidth, guiSizeHeight);
+  framesPerUpdateSlider.addClass("mySliders");
+  framesPerUpdateSlider.input(() => {
+    framesPerUpdate = framesPerUpdateSlider.value();
+  });
+
+    let generateButton = createButton('Generate');
+  generateButton.position(width - guiSizeWidth - wallThickness, wallThickness + guiSizeHeight * 8);
+  generateButton.size(guiSizeWidth, guiSizeHeight);
+  generateButton.addClass("myElements");
+  generateButton.style('font-size', '10px');
+
+  generateButton.mousePressed(() => {
+    let selectedAlgorithm = selector.value();
+
+    grid = new Grid(cols, rows, cellSize);
+
+    if (selectedAlgorithm === "Binary Tree")
+    {
+      algorithm = new BinaryTree(grid);
+    }
+    else if (selectedAlgorithm === "Sidewinder")
+    {
+      algorithm = new Sidewinder(grid);
+    }
+    else if (selectedAlgorithm === "Wilsons")
+    {
+      algorithm = new Wilsons(grid);
+    }
+    else if(selectedAlgorithm == "Aldous-Broder")
+    {
+      algorithm = new AldousBroder(grid);
+    }
+    else if(selectedAlgorithm == "Hunt and Kill")
+    {
+      algorithm = new HuntAndKill(grid);
+    }
+    else if(selectedAlgorithm == "Recursive Backtracker")
+    {
+      algorithm = new RecursiveBacktracker(grid);
+    }
+    else if(selectedAlgorithm == "Prim's")
+    {
+      algorithm = new Prims(grid);
+    }
+    else if(selectedAlgorithm == "Kruskal's")
+    {
+      algorithm = new Kruskals(grid);
+    }
+  });
+}

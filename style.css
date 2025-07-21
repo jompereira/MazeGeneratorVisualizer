@@ -1,0 +1,18 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  display: block;
+}
+
+.myElements {
+  font-size: 6px;
+}
+
+.mySliders {
+  height: 30px;
+}
+
+
