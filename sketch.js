@@ -7,10 +7,10 @@ let algorithms = ["Binary Tree", "Sidewinder", "Aldous-Broder", "Wilsons", "Hunt
 let guiSizeWidth = 200;
 let guiSizeHeight = 50;
 let framesPerUpdate = 1;
-
 let gridOffsetY = 50;
-
 let algorithm;
+let posX;
+let posY;
 
 function setup() 
 {
@@ -19,6 +19,9 @@ function setup()
   createCanvas((25 * cellSize) + offsetWidth, (25 * cellSize) + offsetHeight);
   grid = new Grid(cols, rows, cellSize, 0, gridOffsetY);
   algorithm = new BinaryTree(grid);
+
+  posX = width - guiSizeWidth - wallThickness;
+  posY = wallThickness + gridOffsetY;
   
   colorMode(RGB);
   
@@ -38,9 +41,9 @@ function draw() {
 
   textSize(20);
   textAlign(LEFT);
-  text("Columns: " + cols, width - guiSizeWidth - wallThickness, wallThickness + guiSizeHeight * 1.6);
-  text("Rows: " + rows, width - guiSizeWidth - wallThickness, wallThickness + guiSizeHeight * 3.2);
-  text("Frames per update: " + framesPerUpdate, width - guiSizeWidth - wallThickness, wallThickness + guiSizeHeight * 4.8);
+  text("Columns: " + cols, posX, posY + guiSizeHeight * 1.6);
+  text("Rows: " + rows, posX, posY + guiSizeHeight * 3.2);
+  text("Frames per update: " + framesPerUpdate, posX, posY + guiSizeHeight * 4.8);
 
   algorithm.update();
   algorithm.draw();
@@ -48,9 +51,6 @@ function draw() {
 
 function gui()
 {
-  let posX = width - guiSizeWidth - wallThickness;
-  let posY = wallThickness;
-
   let selector = createSelect();
   selector.position(posX, posY);
   selector.size(guiSizeWidth, guiSizeHeight);
@@ -64,7 +64,7 @@ function gui()
   selector.addClass("myElements");
 
   let widthSlider = createSlider(5, 25, cols);
-  widthSlider.position(width - guiSizeWidth - wallThickness, wallThickness + guiSizeHeight * 1.5);
+  widthSlider.position(posX, posY + guiSizeHeight * 1.5);
   widthSlider.style('margin-top', '5px');
   widthSlider.size(guiSizeWidth, guiSizeHeight);
   widthSlider.addClass("mySliders");
@@ -73,17 +73,15 @@ function gui()
   });
 
   let heightSlider = createSlider(5, 25, rows);
-  heightSlider.position(width - guiSizeWidth - wallThickness, wallThickness + guiSizeHeight * 3.1);
+  heightSlider.position(posX, posY + guiSizeHeight * 3.1);
   heightSlider.size(guiSizeWidth, guiSizeHeight);
   heightSlider.addClass("mySliders");
-  heightSlider.style('margin-top', '5px');
-  heightSlider.style('margin-bottom', '5px');
   heightSlider.input(() => {
     rows = heightSlider.value();
   });
 
   let framesPerUpdateSlider = createSlider(1, 50, 1);
-  framesPerUpdateSlider.position(width - guiSizeWidth - wallThickness, wallThickness + guiSizeHeight * 4.8);
+  framesPerUpdateSlider.position(posX, posY + guiSizeHeight * 4.8);
   framesPerUpdateSlider.size(guiSizeWidth, guiSizeHeight);
   framesPerUpdateSlider.addClass("mySliders");
   framesPerUpdateSlider.input(() => {
@@ -91,10 +89,9 @@ function gui()
   });
 
     let generateButton = createButton('Generate');
-  generateButton.position(width - guiSizeWidth - wallThickness, wallThickness + guiSizeHeight * 8);
+  generateButton.position(posX, posY + guiSizeHeight * 8);
   generateButton.size(guiSizeWidth, guiSizeHeight);
   generateButton.addClass("myElements");
-
   generateButton.mousePressed(() => {
     let selectedAlgorithm = selector.value();
 
