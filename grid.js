@@ -3,10 +3,12 @@ class Grid
 {
   static directions = {Up: 0, Right : 1, Down : 2, Left : 3};
 
-  constructor(sizeX, sizeY, cellSize) 
+  constructor(sizeX, sizeY, cellSize, offsetX = 0, offsetY = 0) 
   {
     this.x = 0;
     this.y = 0;
+    this.offsetX = offsetX;
+    this.offsetY = offsetY;
     this.sizeX = sizeX;
     this.sizeY = sizeY;
     this.cellSize = cellSize;
@@ -25,7 +27,7 @@ class Grid
         let currentRow = [];
         for (let row = 0; row < this.sizeY; row++) 
         {
-        currentRow.push(new Cell(col, row, this.cellSize, 0, 20));
+          currentRow.push(new Cell(col, row, this.cellSize, this.offsetX, this.offsetY));
         }
         this.cells.push(currentRow);
     }

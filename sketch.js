@@ -1,22 +1,23 @@
 let rows = 10;
 let cols = 10;
-let cellSize = 15;
+let cellSize = 35;
 let grid;
-let wallThickness = 2;
-let algorithms = ["Binary Tree", "Sidewinder", "Aldous-Broder", "Wilsons", "Hunt and Kill", "Recursive Backtracker", "Prim's", "Kruskal's"];
-let guiSizeWidth = 100;
-let guiSizeHeight = 20;
+let wallThickness = 5;
+let algorithms = ["Binary Tree", "Sidewinder", "Aldous-Broder", "Wilsons", "Hunt and Kill", "Recursive Backtracker"];
+let guiSizeWidth = 200;
+let guiSizeHeight = 50;
 let framesPerUpdate = 1;
 
+let gridOffsetY = 50;
 
 let algorithm;
 
 function setup() 
 {
-  let offsetWidth = wallThickness * 75;
-  let offsetHeight = wallThickness * 15;
+  let offsetWidth =  wallThickness * 75;
+  let offsetHeight = gridOffsetY + wallThickness * 15;
   createCanvas((25 * cellSize) + offsetWidth, (25 * cellSize) + offsetHeight);
-  grid = new Grid(cols, rows, cellSize);
+  grid = new Grid(cols, rows, cellSize, 0, gridOffsetY);
   algorithm = new BinaryTree(grid);
   
   colorMode(RGB);
@@ -28,14 +29,14 @@ function draw() {
   background(220);
 
   noStroke();
-  textSize(20);
+  textSize(50);
   fill(0);
   textAlign(CENTER);
   textStyle(NORMAL);
   textFont('Arial');
   text("Maze Generator", 0,0, width, 50);
 
-  textSize(8);
+  textSize(20);
   textAlign(LEFT);
   text("Columns: " + cols, width - guiSizeWidth - wallThickness, wallThickness + guiSizeHeight * 1.6);
   text("Rows: " + rows, width - guiSizeWidth - wallThickness, wallThickness + guiSizeHeight * 3.2);
@@ -93,12 +94,11 @@ function gui()
   generateButton.position(width - guiSizeWidth - wallThickness, wallThickness + guiSizeHeight * 8);
   generateButton.size(guiSizeWidth, guiSizeHeight);
   generateButton.addClass("myElements");
-  generateButton.style('font-size', '10px');
 
   generateButton.mousePressed(() => {
     let selectedAlgorithm = selector.value();
 
-    grid = new Grid(cols, rows, cellSize);
+    grid = new Grid(cols, rows, cellSize, 0, gridOffsetY);
 
     if (selectedAlgorithm === "Binary Tree")
     {
@@ -123,14 +123,6 @@ function gui()
     else if(selectedAlgorithm == "Recursive Backtracker")
     {
       algorithm = new RecursiveBacktracker(grid);
-    }
-    else if(selectedAlgorithm == "Prim's")
-    {
-      algorithm = new Prims(grid);
-    }
-    else if(selectedAlgorithm == "Kruskal's")
-    {
-      algorithm = new Kruskals(grid);
     }
   });
 }

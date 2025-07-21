@@ -65,11 +65,7 @@ class Wilsons extends MazeBuilder
 
                         this.visited.push({x: this.x, y: this.y});
                         // Remove from unvisited
-                        let idx = this.unvisited.findIndex(cell => cell.x === this.x && cell.y === this.y);
-                        if (idx !== -1) 
-                        {
-                            this.unvisited.splice(idx, 1);
-                        }
+                        this.RemoveFromUnvisited(this.x, this.y);
 
                         let dir = this.getDirection(this.queue[i].x, this.queue[i].y, this.queue[i + 1].x, this.queue[i + 1].y);
                         this.carvePath(dir);
@@ -78,13 +74,8 @@ class Wilsons extends MazeBuilder
                         this.x = this.queue[i + 1].x;
                         this.y = this.queue[i + 1].y;
 
-                        // this.setVisited(true);
                         this.visited.push({x: this.x, y: this.y});
-                        idx = this.unvisited.findIndex(cell => cell.x === this.x && cell.y === this.y);
-                        if (idx !== -1) 
-                        {
-                            this.unvisited.splice(idx, 1);
-                        }
+                        this.RemoveFromUnvisited(this.x, this.y);
                     }
                     
                     if(this.unvisited.length > 0)
