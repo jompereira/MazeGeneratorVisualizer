@@ -110,6 +110,7 @@ class Wilsons extends MazeBuilder
 
     draw()
     {
+        super.drawQueue();
         super.drawCurrentCell();
         super.draw();
     }
