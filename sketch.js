@@ -131,7 +131,8 @@ function gui()
   downloadJSONNButton.size(guiSizeWidth, guiSizeHeight);
   downloadJSONNButton.addClass("myElements");
   downloadJSONNButton.mousePressed(() => {
-    let content = JSON.stringify({row: grid.cells[0][0].row, col: grid.cells[0][0].col, walls: grid.cells[0][0].walls});
-    save([content], "maze-grid.json");
+    
+    let jsonString = JSON.stringify(grid.cells);
+    save([jsonString], "maze-grid.json");
   });
 }
