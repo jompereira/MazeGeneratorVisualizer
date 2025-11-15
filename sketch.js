@@ -89,11 +89,14 @@ function gui()
   });
 
     let generateButton = createButton('Generate');
-  generateButton.position(posX, posY + guiSizeHeight * 8);
+  generateButton.position(posX, posY + guiSizeHeight * 6.4);
   generateButton.size(guiSizeWidth, guiSizeHeight);
   generateButton.addClass("myElements");
   generateButton.mousePressed(() => {
     let selectedAlgorithm = selector.value();
+
+  let content = "This text was generated at runtime!";
+  save([content], "runtime-file.txt");
 
     grid = new Grid(cols, rows, cellSize, 0, gridOffsetY);
 
@@ -121,5 +124,14 @@ function gui()
     {
       algorithm = new RecursiveBacktracker(grid);
     }
+  });
+
+  let downloadJSONNButton = createButton('Download JSON');
+  downloadJSONNButton.position(posX, posY + guiSizeHeight * 7.5);
+  downloadJSONNButton.size(guiSizeWidth, guiSizeHeight);
+  downloadJSONNButton.addClass("myElements");
+  downloadJSONNButton.mousePressed(() => {
+    let content = JSON.stringify({row: grid.cells[0][0].row, col: grid.cells[0][0].col, walls: grid.cells[0][0].walls});
+    save([content], "maze-grid.json");
   });
 }
