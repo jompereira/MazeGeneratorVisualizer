@@ -3,7 +3,7 @@ let cols = 10;
 let cellSize = 35;
 let grid;
 let wallThickness = 5;
-let algorithms = ["Binary Tree", "Sidewinder", "Aldous-Broder", "Wilsons", "Hunt and Kill", "Recursive Backtracker", "Kruskal's"];
+let algorithms = ["Binary Tree", "Sidewinder", "Aldous-Broder", "Wilsons", "Hunt and Kill", "Recursive Backtracker", "Kruskal's", "Prim's"];
 let guiSizeWidth = 200;
 let guiSizeHeight = 50;
 let framesPerUpdate = 1;
@@ -125,7 +125,10 @@ function gui()
     {
       algorithm = new Kruskals(grid);
     }
-
+    else if(selectedAlgorithm == "Prim's")
+    {
+      algorithm = new Prims(grid);
+    }
   });
 
   let downloadJSONNButton = createButton('Download JSON');
