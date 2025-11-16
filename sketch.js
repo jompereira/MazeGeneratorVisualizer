@@ -3,7 +3,7 @@ let cols = 10;
 let cellSize = 35;
 let grid;
 let wallThickness = 5;
-let algorithms = ["Binary Tree", "Sidewinder", "Aldous-Broder", "Wilsons", "Hunt and Kill", "Recursive Backtracker"];
+let algorithms = ["Binary Tree", "Sidewinder", "Aldous-Broder", "Wilsons", "Hunt and Kill", "Recursive Backtracker", "Kruskal's"];
 let guiSizeWidth = 200;
 let guiSizeHeight = 50;
 let framesPerUpdate = 1;
@@ -95,9 +95,6 @@ function gui()
   generateButton.mousePressed(() => {
     let selectedAlgorithm = selector.value();
 
-  let content = "This text was generated at runtime!";
-  save([content], "runtime-file.txt");
-
     grid = new Grid(cols, rows, cellSize, 0, gridOffsetY);
 
     if (selectedAlgorithm === "Binary Tree")
@@ -124,6 +121,11 @@ function gui()
     {
       algorithm = new RecursiveBacktracker(grid);
     }
+    else if(selectedAlgorithm == "Kruskal's")
+    {
+      algorithm = new Kruskals(grid);
+    }
+
   });
 
   let downloadJSONNButton = createButton('Download JSON');
