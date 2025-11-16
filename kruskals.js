@@ -15,10 +15,10 @@ class Kruskals extends MazeBuilder
             for (let row = 0; row < grid.sizeY; row++)
             {
                 if(col < grid.sizeX - 1)
-                    this.edges.push({cellA: grid.cells[col][row], cellB: grid.cells[col + 1][row], direction: Grid.directions.Down, weight : random(0, 10)});
+                    this.edges.push({cellA: grid.cells[col][row], cellB: grid.cells[col + 1][row], direction: Grid.directions.Right, weight : random(0, 10)});
                 
                 if(row < grid.sizeY - 1)
-                    this.edges.push({cellA: grid.cells[col][row], cellB: grid.cells[col][row + 1], direction: Grid.directions.Right, weight : random(0, 10)});
+                    this.edges.push({cellA: grid.cells[col][row], cellB: grid.cells[col][row + 1], direction: Grid.directions.Down, weight : random(0, 10)});
             }
         }
 

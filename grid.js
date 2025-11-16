@@ -21,13 +21,14 @@ class Grid
   initialize()
   {
     // Initialize 2D grid
+    // [column][row]
     this.cells = [];
     for (let col = 0; col < this.sizeX; col++) 
     {
         let currentRow = [];
         for (let row = 0; row < this.sizeY; row++) 
         {
-          currentRow.push(new Cell(col, row, this.cellSize, this.offsetX, this.offsetY));
+          currentRow.push(new Cell(row, col, this.cellSize, this.offsetX, this.offsetY));
         }
         this.cells.push(currentRow);
     }

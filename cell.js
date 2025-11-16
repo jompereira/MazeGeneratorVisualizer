@@ -5,8 +5,8 @@ class Cell
   {
     this.row = row;
     this.col = col;
-    this.x = row * cellSize;
-    this.y = col * cellSize;
+    this.x = col * cellSize;
+    this.y = row * cellSize;
     this.cellSize = cellSize;
     this.offsetX = offsetX;
     this.offsetY = offsetY;
