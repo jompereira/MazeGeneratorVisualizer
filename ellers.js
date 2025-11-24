@@ -138,7 +138,7 @@ class Ellers extends MazeBuilder
                     // merge sets if they exist
                     if(cellASet == null && cellBSet == null)
                     {
-                        let newSet = {cells: [cellA, cellB], color : color(random(0,255), random(0,255), random(0,255), 200)};
+                        let newSet = {cells: [cellA, cellB], color : color(random(0,255), random(0,255), random(0,255), 150)};
                         this.sets.push(newSet);
                     }
                     else if(cellASet != null && cellBSet != null)
@@ -164,12 +164,12 @@ class Ellers extends MazeBuilder
                 {
                     if(cellASet == null)
                     {
-                        let newSet = {cells: [cellA], color : color(random(0,255), random(0,255), random(0,255), 200)};
+                        let newSet = {cells: [cellA], color : color(random(0,255), random(0,255), random(0,255), 150)};
                         this.sets.push(newSet);
                     }
                     if(cellBSet == null)
                     {
-                        let newSet = {cells: [cellB], color : color(random(0,255), random(0,255), random(0,255), 200)};
+                        let newSet = {cells: [cellB], color : color(random(0,255), random(0,255), random(0,255), 150)};
                         this.sets.push(newSet);
                     }
                 }

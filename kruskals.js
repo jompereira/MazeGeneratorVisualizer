@@ -101,10 +101,9 @@ class Kruskals extends MazeBuilder
 
         for(let set of this.sets)
         {
-            let setColor = color(0, 0, this.sets.indexOf(set) + 1 * (255 / this.sets.length), 200);
             for(let cell of set.cells)
             {
-                    cell.highlight(set.color);
+                cell.highlight(set.color);
             }
         }
     }
