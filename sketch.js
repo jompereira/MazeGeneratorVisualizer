@@ -3,7 +3,7 @@ let cols = 10;
 let cellSize = 35;
 let grid;
 let wallThickness = 5;
-let algorithms = ["Binary Tree", "Sidewinder", "Aldous-Broder", "Wilsons", "Hunt and Kill", "Recursive Backtracker", "Kruskal's", "Prim's"];
+let algorithms = ["Binary Tree", "Sidewinder", "Aldous-Broder", "Wilsons", "Hunt and Kill", "Recursive Backtracker", "Kruskal's", "Prim's", "Eller's"];
 let guiSizeWidth = 200;
 let guiSizeHeight = 50;
 let framesPerUpdate = 1;
@@ -128,6 +128,10 @@ function gui()
     else if(selectedAlgorithm == "Prim's")
     {
       algorithm = new Prims(grid);
+    }
+    else if(selectedAlgorithm == "Eller's")
+    {
+      algorithm = new Ellers(grid);
     }
   });
 
